@@ -1,6 +1,0 @@
-# COMP551 Mini-Project 2: SGD & Text Classification
-
-# Description
-
-* Preform SGD on Diabetes dataset and understand how different methods of gradient descent impact the convergence speed of the model.
-* 
