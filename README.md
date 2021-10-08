@@ -8,4 +8,4 @@
 
 ## Notes:
 
-* Include the datasets in the same directory as the repository in a file named `data` with the `diabetes` and `fake_news` files inside
+* Include the datasets in the same directory as the repository in a folder named `data` with the `diabetes` and `fake_news` files inside
