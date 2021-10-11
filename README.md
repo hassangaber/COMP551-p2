@@ -6,8 +6,9 @@
 
 ## Notes:
 * Include the datasets in the same directory as the repository in a folder named `data` with the `diabetes` and `fake_news` files inside
+* For the `diabetes` dataset, often times when feeding data to a model the input from the dataframe is interpreted as a 1D array inside of a 2D array. This causes obvious dimension incompatibility for dot products and such. To fix this issue: `x.to_numpy().ravel()` for the dataframe or dataframe fragment `x`.
 
 ## TODO:
-- [ ] Set up logistic regression and gradient descent functions from files
+- [x] Set up logistic regression and gradient descent functions from files
 - [ ] Find converging GD solution by optimizing learning rates and maximum iterations of the GD function
 - [ ] Find relationship between gradient normal and validation accuracy as a function of learning rate and maximum iterations

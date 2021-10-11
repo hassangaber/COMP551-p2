@@ -2,13 +2,15 @@ import numpy as np
 
 logistic = lambda z: 1./ (1 + np.exp(-z))       #logistic function
 
+# This is the gradient given some inputs x,y for a logistic regression
 def gradient(self, x, y):
-    N,D = x.shape
-    yh = logistic(np.dot(x, self.w))    # predictions  size N
+    N, D = x.shape
+    yh = logistic(np.dot(x, self.w))    # Preidictions, sigma(w.T @ x)
     grad = np.dot(x.T, yh - y)/N        # divide by N because cost is mean over N points
-    return grad                         # size D
+    return grad                         
 
-
+# This class explicitly runs a logisitc regression on the data and
+# optimizes the cost function using gradient descent
 class LogisticRegression:
     
     def __init__(self, add_bias=True, learning_rate=.1, epsilon=1e-4, max_iters=1e5, verbose=False):
@@ -35,8 +37,9 @@ class LogisticRegression:
             t += 1
         
         if self.verbose:
-            print(f'terminated after {t} iterations, with norm of the gradient equal to {np.linalg.norm(g)}')
-            print(f'the weight found: {self.w}')
+            print(f'{t} Iterations')
+            print(f'Norm of gradient: {np.linalg.norm(g)}')
+            print(f'\nWeights: {self.w}\n')
         return self
     
     def predict(self, x):
