@@ -4,6 +4,7 @@
 
 Run `pip install requirements.txt` to install all dependencies  
 Run `pip freeze > requirements.txt` to update the requirements file
+
 Include the datasets in the same directory as the repository in a folder named `data` with the `diabetes` and `fake_news` files inside
 
 ## Description
