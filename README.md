@@ -1,5 +1,10 @@
 # COMP551 Mini-Project 2: SGD & Text Classification
 
+## Setup
+
+Run `pip install requirements.txt` to install all dependencies  
+Run `pip freeze > requirements.txt` to update the requirements file
+
 ## Description
 * *Part 1:* Observe gradient descent preformance as pramaters vary for the diabetes dataset
 * *Part 2:* Preproccess fake-news data for binary classification model by mapping raw text details to text features and build a model to predict if text is human or computer-generated 

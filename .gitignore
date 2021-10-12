@@ -2,3 +2,5 @@
 data/
 .ipynb_checkpoints/
 src/.ipynb_checkpoints/Part1_hassan-checkpoint.ipynb
+
+.idea/
