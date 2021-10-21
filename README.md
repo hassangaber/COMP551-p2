@@ -23,5 +23,6 @@ Include the datasets in the same directory as the repository in a folder named `
 - [x] Find converging GD by optimizing max. iterations, learning rate, and training set accuracy on the test set
 - [x] Implement mini-batch SGD
 - [ ] Compare convergence speed and accuracy of mini-batch SGD with full SGD
-- [ ] Observe effect of varying the momentum coefficient in full SGD
-
+- [x] Observe effect of varying the momentum coefficient in full SGD
+- [ ] Accuracy plots for 1.3, 1.4
+- [ ] Gradient oscillation graph with respect to solution
