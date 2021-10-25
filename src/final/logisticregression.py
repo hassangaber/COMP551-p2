@@ -44,7 +44,7 @@ class LogisticRegression:
             t += 1
         
         if self.verbose:
-            print(f'{t} Iterations')
+            print(f'Convergence: {t} Iterations')
             print(f'Norm of gradient: {np.linalg.norm(g)}')
            #print(f'\nWeights: {self.w}\n')
         return self
