@@ -14,13 +14,15 @@ def gradient(self,x,y,m=0,prevGrad=0):
 # Logisitic regression class accounting for several input parameters for the model
 class LogisticRegression:
     
-    def __init__(self, add_bias=True, learning_rate=.1, epsilon=9.5e-3, max_iters=1e5, verbose=False, momentum=0):
+    def __init__(self, add_bias=True, learning_rate=.1, epsilon=9.5e-3, max_iters=1e5, verbose=False,
+                 momentum=0):
         self.add_bias = add_bias
         self.learning_rate = learning_rate
         self.epsilon = epsilon                        #to get the tolerance for the norm of gradients 
         self.max_iters = max_iters                    #maximum number of iteration of gradient descent
         self.verbose = verbose
         self.momentum = momentum
+
 
     # This method fits a logisitic regression to the training data using
     # gradient descent. The weights are calculated and ouputted.
@@ -34,7 +36,7 @@ class LogisticRegression:
         self.w = np.zeros(D)
         g = np.inf 
         t = 0
-        # the code snippet below is for gradient descent
+  
         while np.linalg.norm(g) > self.epsilon and t < self.max_iters:
             if (t == 0):
                 g = self.gradient(x, y)
@@ -43,12 +45,8 @@ class LogisticRegression:
             self.w = self.w - self.learning_rate * g 
             t += 1
         
-        if self.verbose:
-            print(f'{t} Iterations')
-            print(f'Norm of gradient: {np.linalg.norm(g)}')
-           #print(f'\nWeights: {self.w}\n')
         return self
-    
+
     # This applies the learned model in the fit method to predict the
     # output of a given set of inputs. Returns a class of probabilities
     # for each label.
