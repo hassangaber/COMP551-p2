@@ -45,7 +45,13 @@ class LogisticRegression:
             self.w = self.w - self.learning_rate * g 
             t += 1
         
+        if self.verbose:
+            print(f'Convergence: {t} Iterations')
+            print(f'Norm of gradient: {np.linalg.norm(g)}')
+            #print(f'\nWeights: {self.w}\n')
+
         return self
+
 
     # This applies the learned model in the fit method to predict the
     # output of a given set of inputs. Returns a class of probabilities
