@@ -74,6 +74,7 @@ class LogisticRegression:
                 t += 1
         else:
             
+            # Iterate over the dataset
             for epoch in range(1, self.epochs+1):
                 # Randomly shuffle the data to maximize preformance metrics
                 np.random.shuffle(Xbatch)
@@ -90,8 +91,9 @@ class LogisticRegression:
                 g = np.inf 
                 t = 0
                 
+                # Iterating over batched data
                 for X, Y in BatchData(Xbatch, Ybatch, self.batchSize):
-                    
+                    # Gradient Descent loop
                     while np.linalg.norm(g) > self.epsilon and t < self.max_iters:
                         if (t == 0):
                             g = self.gradient(X, Y)
@@ -100,11 +102,13 @@ class LogisticRegression:
                         self.w = self.w - self.learning_rate * g 
                         t += 1
                         
+                    # Predicitons for Test data and validation data
                     yhT = logistic(np.dot(XPT,self.w))
                     yhV = logistic(np.dot(XPV,self.w))
 
                     predictionT, predictionV = [],[]
-                    # Decision Boundary
+
+                    # Decision Boundaries
                     for x in np.array(yhT).ravel():
                         if x < 0.5: predictionT.append(0)
                         else: predictionT.append(1)
