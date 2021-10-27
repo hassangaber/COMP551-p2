@@ -1,32 +1,28 @@
 import numpy as np
 
-# Logistic function
-logistic = lambda z: 1./ (1 + np.exp(-z))
+logistic = lambda z: 1./ (1 + np.exp(-z))       #logistic function
 
-# Gradient of cost curve given inputs x,y and weights
-def gradient(self,x,y,m=0,prevGrad=0):
+# This is the gradient given some inputs x,y for a logistic regression
+def gradient_Momentum(self, x, y, m = 0, old_grad = 0):
     N, D = x.shape
-    yh = logistic(np.dot(x, self.w))    # y-hat, probability class
+    yh = logistic(np.dot(x, self.w))    # Preidictions, sigma(w.T @ x)
     grad = np.dot(x.T, yh - y)/N        # divide by N because cost is mean over N points
-    gradm = (m*prevGrad) + ((1-m)*grad) # calculate gradient w.r.t momentum, if m=0, then gradm=grad
-    return gradm
+    mom = (m*old_grad) + ((1-m)*grad)
+    return mom                         
 
-# Logisitic regression class accounting for several input parameters for the model
+# This class explicitly runs a logisitc regression on the data and
+# optimizes the cost function using gradient descent
 class LogisticRegression:
     
-    def __init__(self, add_bias=True, learning_rate=.1, epsilon=9.5e-3, max_iters=1e5, verbose=False,
-                 momentum=0):
+    def __init__(self, add_bias=True, learning_rate=.1, epsilon=1e-3, max_iters=1e6, verbose=False, momentum = 0):
         self.add_bias = add_bias
         self.learning_rate = learning_rate
         self.epsilon = epsilon                        #to get the tolerance for the norm of gradients 
         self.max_iters = max_iters                    #maximum number of iteration of gradient descent
         self.verbose = verbose
         self.momentum = momentum
-
-
-    # This method fits a logisitic regression to the training data using
-    # gradient descent. The weights are calculated and ouputted.
-    def fit(self,x,y):
+        
+    def fit(self, x, y):
         if x.ndim == 1:
             x = x[:, None]
         if self.add_bias:
@@ -36,12 +32,12 @@ class LogisticRegression:
         self.w = np.zeros(D)
         g = np.inf 
         t = 0
-  
+        # the code snippet below is for gradient descent
         while np.linalg.norm(g) > self.epsilon and t < self.max_iters:
             if (t == 0):
-                g = self.gradient(x, y)
+                g = self.gradient_Momentum(x, y)
             else:
-                g = self.gradient(x,y,self.momentum,g)   
+                g = self.gradient_Momentum(x,y,self.momentum, g)   
             self.w = self.w - self.learning_rate * g 
             t += 1
         
@@ -49,21 +45,15 @@ class LogisticRegression:
             print(f'Convergence: {t} Iterations')
             print(f'Norm of gradient: {np.linalg.norm(g)}')
             #print(f'\nWeights: {self.w}\n')
-
         return self
-
-
-    # This applies the learned model in the fit method to predict the
-    # output of a given set of inputs. Returns a class of probabilities
-    # for each label.
+    
     def predict(self, x):
         if x.ndim == 1:
             x = x[:, None]
         Nt = x.shape[0]
         if self.add_bias:
             x = np.column_stack([x,np.ones(Nt)])
-        yh = logistic(np.dot(x,self.w))            
+        yh = logistic(np.dot(x,self.w))            #predict output
         return yh
 
-# Initialize class method
-LogisticRegression.gradient = gradient
+LogisticRegression.gradient_Momentum = gradient_Momentum  

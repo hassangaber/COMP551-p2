@@ -37,7 +37,7 @@ def BatchData(X: np.array, Y: np.array, size: int):
 class LogisticRegression:
     
     def __init__(self, add_bias=True, learning_rate=.1, epsilon=9.5e-3, max_iters=1e5, verbose=False,
-                 momentum=0, batchSize=0, epochs=0, prediction=[]):
+                 momentum=0, batchSize=0, epochs=0):
         self.add_bias = add_bias
         self.learning_rate = learning_rate
         self.epsilon = epsilon                        #to get the tolerance for the norm of gradients 
@@ -46,7 +46,6 @@ class LogisticRegression:
         self.momentum = momentum
         self.batchSize = batchSize
         self.epochs = epochs
-        self.prediction = prediction
     # This method fits a logisitic regression to the training data using
     # gradient descent. The weights are calculated and ouputted.
     def fit(self,x,y):
@@ -116,6 +115,7 @@ class LogisticRegression:
                     for x in np.array(yhV).ravel():
                         if x < 0.5: predictionV.append(0)
                         else: predictionV.append(1)
+
 
                 print(f'Batch Size: {self.batchSize}    TEST accuracy: {accuracy_score(YPT,predictionT)}   VALIDATION accuracy: {accuracy_score(YPV,predictionV)}')
              
